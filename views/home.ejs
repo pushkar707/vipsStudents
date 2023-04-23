@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    form{
+        width: 50%;
+    }
+    .form-control{
+        text-transform: uppercase;
+    }
+    p{
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+    .small{
+        margin: 0;
+        font-size: 8px;
+    }
+    .students{
+        width: fit-content;
+        margin: auto;
+    }
+    .student{
+        margin-bottom: 30px;
+        display: flex;
+    }
+    .id-card{
+        width: fit-content;
+        border: 0.5px solid rgba(0, 0, 0, 0.338);
+    }
+    .student-upper{
+        padding: 5px;
+        display: flex;
+        color: white;
+        background-color: rgb(226 73 73);
+    }
+    .student-upper .text{
+        margin: auto 10px;
+        text-align: center;
+    }
+    .student-middle{
+        padding: 15px;
+        display: flex;
+    }
+    .student-image img{
+        width: 100px;
+    }
+    .student-info{
+        display: flex;
+    }
+    .student-info p{
+        margin-bottom: 3px;
+        font-size: 13px;
+    }
+    .student-info .titles{
+        margin-right: 5px;
+        font-weight: bold;
+    }
+    .student-footer{
+        padding: 7px;
+        padding-top: 13px;
+        color: white;
+        background-color: rgb(61 61 135);
+        display: flex;
+        justify-content: space-between;
+    }
+    .student-footer span{
+        font-size: 12px;
+    }
+    .student-checked{
+        margin-left: 16px;
+    }
+    @media (max-width:900px) {
+        form{
+            width: 100% !important;
+        }
+    }
+</style>
+<body>
+    <img src="/img/logo.png" alt="" width="110px" class="mx-auto d-block my-3">
+    <form action="/" method="POST" class="px-5 mx-auto my-4">
+        <div class="mb-3">
+            <label for="enrollmentNo" class="form-label">Enrollment No.</label>
+            <input type="number" id="enrollmentNo" name="enrollmentNo" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="mobileNo" class="form-label">Mobile No.</label>
+            <input type="number" id="mobileNo" name="mobileNo" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="programme" class="form-label">Programme</label>
+            <select id="programme" name="programme" class="form-select">
+                <option value="">Select programme</option>
+                <option value="BCA 1ST SHIFT">BCA Shift 1</option>
+                <option value="BCA 2ST SHIFT">BCA Shift 2</option>
+                <option value="MCA">MCA</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="batch" class="form-label">Start Year</label>
+            <input type="number" id="batch" name="batch" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="fatherName" class="form-label">Father Name</label>
+            <input type="text" id="fatherName" name="fatherName" class="form-control">
+        </div>
+        <div class="mb-3">
+            <input type="submit" class="btn btn-primary" value="Check">
+        </div>
+    </form>
+    <div class="students">
+        <% students.forEach(student => { %>
+            <div class="student">
+               <div>
+                <div class="id-card">
+                    <div class="student-upper">
+                        <img src="img/logo.png" alt="" width="50px">
+                        <div class="text">
+                         <p>Vivekaanad Institute of Professional Studies</p>
+                         <p class="small">(affiliated to GGSIPU University & Recognized by Bar Council of India and AICTE)</p>
+                        </div>
+                    </div>
+                    <div class="student-middle">
+                     <div class="student-image">
+                         <img src="/img/00<%= student.enrollmentNo %>.jpg" alt="">
+                         <img src="/img/00<%= student.enrollmentNo %>.png" alt="">
+                         <img src="/img/00<%= student.enrollmentNo %>.jpeg" alt="">
+                         <img src="/img/0<%= student.enrollmentNo %>.jpg" alt="">
+                         <img src="/img/0<%= student.enrollmentNo %>.png" alt="">
+                         <img src="/img/0<%= student.enrollmentNo %>.jpeg" alt="">
+                         <img src="/img/<%= student.enrollmentNo %>.jpg" alt="">
+                         <img src="/img/<%= student.enrollmentNo %>.jpeg" alt="">
+                         <img src="/img/<%= student.enrollmentNo %>.png" alt="">
+                     </div>
+                     <div class="student-info">
+                         <div class="titles">
+                             <p>Name</p>
+                             <p>Program</p> 
+                             <p>Enroll No</p>
+                             <p>D.O.B</p>
+                             <p>Valid Upto</p>
+                         </div>
+                         <div class="info">
+                             <p>: <%= student.name %></p>
+                             <p>: <%= student.programme %></p>
+                             <p>: <%= student.enrollmentNo %></p>
+                             <p>: <%= student.dob %></p>
+                             <p>: <%= student.validUpto %></p>
+                         </div>
+                     </div>
+                    </div>
+                    <div class="student-footer">
+                     <span class="clg-name">Vivekanand Institute of Information Technology</span>
+                     <span class="dean">
+                         Dean 
+                     </span>
+                    </div>
+                   </div>
+                   <form action="/verify/<%= student._id %>" method="POST">
+                    <button class="btn btn-success mt-2">Student Verfied</button>
+                   </form>
+               </div>
+               <div class="student-checked">
+                <h4>Checked On:</h4>
+                <table class="table table-bordered">
+                    <% student.checkedAt.forEach(date => { %>
+                     <tr><td><%= date %></td></tr>
+                    <% }) %>
+                </table>
+               </div>
+            </div>
+            
+           <% }) %>
+    </div>
+</body>
+</html>
